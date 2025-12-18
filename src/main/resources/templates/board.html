@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD</title>
+</head>
+<body>
+
+<div align="center">
+
+    <h2>싱글벙글 백엔드 갤러리</h2>
+
+    <table width="750" border="1" cellspacing="0">
+        <tr>
+            <td>글 번호</td>
+            <td>
+                <p>제목</p>
+            </td>
+            <td>작성자</td>
+        </tr>
+
+        <tr id="board_list">
+            <td id="no"></td>
+            <td id="title"></td>
+            <td id="writer"></td>
+        </tr>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/board.js}"></script>
+</body>
+</html>
