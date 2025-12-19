@@ -1,8 +1,6 @@
-window.onload = function(){
-var board = document.getElementById("board");
-var no = document.getElementById("no");
-var title = document.getElementById("title");
-var writer = document.getElementById("writer");
+window.addEventListener("pageshow",function (){
+
+    $("#tableBody").empty();
 
     $.ajax({
         type: "POST",
@@ -16,6 +14,7 @@ var writer = document.getElementById("writer");
                 tbl += "<td>"+data[i].board_no+"</td>";
                 tbl += "<td><a href='/cont?no="+ data[i].board_no + "'>"+data[i].title+"</a></td>";
                 tbl += "<td>"+data[i].writer+"</td>";
+                tbl += "<td>"+data[i].hit+"</td>";
                 tbl += "<td>"+data[i].board_like+"</td>";
                 tbl += "<td>"+data[i].board_unlike+"</td>";
                 tbl += "</tr>"
@@ -24,8 +23,8 @@ var writer = document.getElementById("writer");
             }
         },
         error: function(data){
-            var tbl = "<tr><td colspan='3' style='text-align: center'>게시글 조회 오류</td></tr>";
+            var tbl = "<tr><td colspan='6' style='text-align: center'>게시글 조회 오류</td></tr>";
             $("#tableBody").append(tbl);
         }
     })
-}
+})

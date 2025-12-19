@@ -27,4 +27,7 @@ public class BoardEntity {
 
     @Column(name = "board_unlike")
     private int boardUnlike;
+
+    @Column(name = "hit")
+    private int hit;
 }
