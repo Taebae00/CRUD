@@ -10,21 +10,27 @@
 
     <h2>싱글벙글 백엔드 갤러리</h2>
 
-    <table width="750" border="1" cellspacing="0">
+    <div>
+        <a>비회원 상태입니다.</a>
+        <button onclick="location.href='/login'">로그인</button>
+        <button>회원가입</button>
+    </div>
+
+    <table id="table" width="750" border="1" cellspacing="0" style="text-align: center">
         <tr>
             <td>글 번호</td>
-            <td>
-                <p>제목</p>
-            </td>
+            <td>제목</td>
             <td>작성자</td>
+            <td>개추</td>
+            <td>비추</td>
         </tr>
 
-        <tr id="board_list">
-            <td id="no"></td>
-            <td id="title"></td>
-            <td id="writer"></td>
-        </tr>
+        <tbody id="tableBody">
+
+        </tbody>
     </table>
+
+        <button>글쓰기</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
