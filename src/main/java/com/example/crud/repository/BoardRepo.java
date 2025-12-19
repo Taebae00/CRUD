@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BoardRepo extends JpaRepository<BoardEntity, Integer> {
 
+    public BoardEntity findByBoardNo(int no);
 }
