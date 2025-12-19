@@ -1,4 +1,4 @@
-package com.example.crud.controller.service;
+package com.example.crud.service;
 
 import com.example.crud.entity.BoardEntity;
 import com.example.crud.model.BoardDTO;
@@ -32,6 +32,7 @@ public class BoardService {
             dto.setWriter(list.get(i).getWriter());
             dto.setBoard_like(list.get(i).getBoardLike());
             dto.setBoard_unlike(list.get(i).getBoardUnlike());
+            dto.setHit(list.get(i).getHit());
 
             boardList.add(dto);
         }
@@ -50,7 +51,13 @@ public class BoardService {
         dto.setWriter(cont.getWriter());
         dto.setBoard_like(cont.getBoardLike());
         dto.setBoard_unlike(cont.getBoardUnlike());
+        dto.setHit(cont.getHit());
 
         return dto;
     }
+
+    public void hitUp(int no) {
+        boardRepo.hitUp(no);
+    }
+
 }

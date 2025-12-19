@@ -11,4 +11,5 @@ public class BoardDTO {
     private String writer;
     private int board_like;
     private int board_unlike;
+    private int hit;
 }

@@ -1,7 +1,8 @@
 package com.example.crud.controller;
 
-import com.example.crud.controller.service.BoardService;
+import com.example.crud.service.BoardService;
 import com.example.crud.model.BoardDTO;
+import com.example.crud.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,11 @@ import java.util.List;
 public class MainController {
 
     private final BoardService boardService;
+    private final UserService userService;
 
-    public MainController(BoardService boardService) {
+    public MainController(BoardService boardService, UserService userService, UserService userService1) {
         this.boardService = boardService;
+        this.userService = userService1;
     }
 
     @GetMapping("/")
@@ -35,6 +38,8 @@ public class MainController {
 
     @GetMapping("/cont")
     public String cont(int no, Model model) {
+
+        boardService.hitUp(no);
         BoardDTO cont = boardService.getCont(no);
         model.addAttribute("cont", cont);
 
@@ -49,5 +54,13 @@ public class MainController {
     @GetMapping("/join")
     public String join() {
         return "join";
+    }
+
+    @PostMapping("/checkName")
+    public int checkName(String name) {
+
+        int dup = userService.checkName(name);
+
+        return dup;
     }
 }
