@@ -8,13 +8,21 @@
 
 <div align="center">
 
-    <h2>싱글벙글 백엔드 갤러리</h2>
+    <h1>싱글벙글 백엔드 갤러리</h1>
 
-    <div>
-        <a>비회원 상태입니다.</a>
+    <div th:if="${session.user == null}">
+        <h3>비회원 상태입니다.</h3>
         <button onclick="location.href='/login'">로그인</button>
-        <button>회원가입</button>
+        <button onclick="location.href='/join'">회원가입</button>
     </div>
+
+    <div th:if="${session.user != null}">
+        <input type="hidden" th:value="${session.user}" id="sessionUser">
+        <h3 th:text="${session.user.getName()} + ' 님 환영합니다 !'"></h3>
+        <button onclick="location.href='/logout'">로그아웃</button>
+    </div>
+
+    <br>
 
     <table id="table" width="750" border="1" cellspacing="0" style="text-align: center">
         <tr>
@@ -30,8 +38,9 @@
 
         </tbody>
     </table>
+    <br>
 
-        <button>글쓰기</button>
+        <button id="writeBTN">글쓰기</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

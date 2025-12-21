@@ -9,26 +9,29 @@
 <div align="center">
     <h2>싱글벙글 백엔드 갤러리</h2>
 
-    <form method="post" action="/join">
+    <form method="post" action="/joinOk" onsubmit="return checkJoin()">
         <table width="500" cellspacing="0" border="1">
 
             <tr>
                 <td>닉네임</td>
-                <td><input></td>
-                <td><input type="button" value="중복확인"></td>
+                <td><input name="nickName" id="nickName"></td>
+                <td><input id="nickNameDupBTN" type="button" value="중복확인"></td>
             </tr>
             <tr>
                 <td>아이디</td>
-                <td><input></td>
-                <td><input type="button" value="중복확인"></td>
+                <td><input name="id" id="id"></td>
+                <td><input id="IdDupBTN" type="button" value="중복확인"></td>
             </tr>
             <tr>
                 <td>비밀번호</td>
-                <td colspan="2"><input type="password"></td>
+                <td colspan="2"><input name="password" id="password" type="password"></td>
             </tr>
         </table>
         <input type="submit" value="회원가입">
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script th:src="@{/js/join.js}"></script>
 </body>
 </html>

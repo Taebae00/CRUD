@@ -1,14 +1,20 @@
 package com.example.crud.controller;
 
+import com.example.crud.model.UserDTO;
 import com.example.crud.service.BoardService;
 import com.example.crud.model.BoardDTO;
 import com.example.crud.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -57,10 +63,73 @@ public class MainController {
     }
 
     @PostMapping("/checkName")
-    public int checkName(String name) {
+    @ResponseBody
+    public int checkName(String nickname) {
 
-        int dup = userService.checkName(name);
+        return userService.checkName(nickname);
+    }
 
-        return dup;
+    @PostMapping("/checkId")
+    @ResponseBody
+    public int checkId(String id) {
+
+        return userService.checkId(id);
+    }
+
+    @PostMapping("/joinOk")
+    public void joinOk(String nickName, String id, String password, HttpServletResponse response) throws IOException {
+
+        System.out.println("닉네임 : "+nickName);
+        System.out.println("아이디 : "+id);
+        System.out.println("비번 : "+password);
+
+        int checkJoin = userService.joinOk(nickName, id, password);
+
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+
+        if (checkJoin < 0) {
+            out.println("<script>");
+            out.println("alert('회원가입에 실패하였습니다.')</script>\"");
+            out.println("history.back();");
+            out.println("</script>");
+        }else {
+            out.println("<script>");
+            out.println("alert('회원가입에 성공하였습니다.');");
+            out.println("location.href='/login';");
+            out.println("</script>");
+        }
+
+    }
+
+    @PostMapping("/loginCheck")
+    @ResponseBody
+    public Object loginCheck(String id, String password, HttpSession session) {
+
+        UserDTO dto = userService.loginCheck(id, password);
+
+        if(dto == null) {
+            return 0;
+        }
+
+        session.setAttribute("user", dto);
+
+        return dto;
+    }
+
+    @GetMapping("/loginOk")
+    public String loginOk(){
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/write")
+    public String write() {
+        return "write";
     }
 }

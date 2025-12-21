@@ -10,20 +10,23 @@
     <h2>싱글벙글 백엔드 갤러리</h2>
 
         <table width="500" cellspacing="0" border="1" style="text-align: center">
-            <form method="post" action="/loginOk">
+            <form method="post" id="loginForm">
             <tr>
                 <td>아이디</td>
-                <td><input></td>
+                <td><input id="id"></td>
                 <td rowspan="2"><input type="submit" value="로그인"></td>
             </tr>
             <tr>
                 <td>비밀번호</td>
-                <td><input type="password"></td>
+                <td><input id="password" type="password"></td>
             </tr>
             </form>
         </table>
         <button onclick="location.href='/join'">회원가입</button>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script th:src="@{/js/login.js}"></script>
 </body>
 </html>

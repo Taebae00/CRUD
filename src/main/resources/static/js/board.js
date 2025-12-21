@@ -28,3 +28,15 @@ window.addEventListener("pageshow",function (){
         }
     })
 })
+
+$("#writeBTN").on("click",function (){
+
+    const login = $("#sessionUser").val();
+
+    if(login == null || login === ""){
+        alert("로그인 한 유저만 글쓰기가 가능합니다.")
+        return false;
+    }
+
+    location.href = "/write";
+})

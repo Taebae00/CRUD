@@ -25,6 +25,4 @@ public class UserEntity {
     @Column(name = "kakao_id")
     private String kakaoId;
 
-    @Column(name = "profile_url")
-    private String profileUrl;
 }
