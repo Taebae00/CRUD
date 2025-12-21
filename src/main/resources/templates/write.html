@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD</title>
+</head>
+<body>
+
+<div align="center">
+
+    <h1>싱글벙글 백엔드 갤러리</h1>
+
+    <br>
+
+    <table id="table" width="750" border="1" cellspacing="0" style="text-align: center">
+        <tr>
+            <td>제목</td>
+        </tr>
+
+        <tr>
+            <td><textarea></textarea></td>
+        </tr>
+
+        <tr>
+            <td>작성자</td>
+        </tr>
+        <tr>
+            <td><input th:value="${session.user.getName()}" disabled></td>
+        </tr>
+    </table>
+    <br>
+
+    <button id="writeBTN">글쓰기</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/board.js}"></script>
+</body>
+</html>
