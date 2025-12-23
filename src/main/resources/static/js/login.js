@@ -6,9 +6,6 @@ $("#loginForm").on("submit", function (event) {
     const password = $("#password").val();
 
 
-    console.log("아이디 : "+id);
-    console.log("비번 : "+password);
-
     if (id === "") {
         alert("아이디를 입력해주세요.")
         return false;

@@ -1,8 +1,11 @@
 package com.example.crud.controller;
 
+import com.example.crud.config.S3Config;
 import com.example.crud.model.UserDTO;
+import com.example.crud.service.BoardLikeService;
 import com.example.crud.service.BoardService;
 import com.example.crud.model.BoardDTO;
+import com.example.crud.service.S3Service;
 import com.example.crud.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,14 +27,18 @@ public class MainController {
 
     private final BoardService boardService;
     private final UserService userService;
+    private final S3Service s3Service;
+    private final BoardLikeService boardLikeService;
 
-    public MainController(BoardService boardService, UserService userService, UserService userService1) {
+    public MainController(BoardService boardService, UserService userService, UserService userService1, S3Config s3Config, S3Service s3Service, BoardLikeService boardLikeService) {
         this.boardService = boardService;
         this.userService = userService1;
+        this.s3Service = s3Service;
+        this.boardLikeService = boardLikeService;
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index()  {
         return "board";
     }
 
@@ -131,5 +140,39 @@ public class MainController {
     @GetMapping("/write")
     public String write() {
         return "write";
+    }
+
+    @PostMapping("/writeOk")
+    public String writeOk(@RequestParam String title,
+                          @RequestParam String cont,
+                          @RequestParam String writer,
+                          @RequestParam(required = false) MultipartFile image) throws IOException {
+
+        String image_url = s3Service.upload(image);
+
+        boardService.write(title, cont, writer, image_url);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/likeCheck")
+    @ResponseBody
+    public int likeCheck(String user, int board_no){
+
+        return boardLikeService.likeCheck(user, board_no);
+    }
+
+    @PostMapping("/likeUp")
+    @ResponseBody
+    public BoardDTO likeUp(String user, int board_no){
+
+        return boardLikeService.likeUp(user,board_no);
+    }
+
+    @PostMapping("/unlikeUp")
+    @ResponseBody
+    public BoardDTO UnlikeUp(String user, int board_no){
+
+        return boardLikeService.UnlikeUp(user,board_no);
     }
 }

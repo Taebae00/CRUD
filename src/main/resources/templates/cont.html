@@ -8,25 +8,46 @@
 
 <div align="center">
 
+    <div th:if="${session.user != null}">
+        <input type="hidden" th:value="${session.user.getId()}" id="sessionUser">
+        <input type="hidden" th:value="${cont.getBoard_no()}" id="board_no">
+        <input type="hidden" th:value="${cont.getBoard_like()}" id="board_like">
+        <input type="hidden" th:value="${cont.getBoard_unlike()}" id="board_unlike">
+    </div>
+
     <h2>싱글벙글 백엔드 갤러리</h2>
 
     <table width="750" cellspacing="0" border="1">
         <tr>
-            <td th:text="${cont.getTitle()}" style="font-style: oblique"></td>
-            <td th:text="${cont.getWriter()}"></td>
+            <td th:text="'글제목 : '+${cont.getTitle()}" colspan="2"></td>
+        </tr>
+
+        <tr>
+            <td th:text="'작성자 : '+${cont.getWriter()}"></td>
             <td th:text="'조회수 : '+ ${cont.getHit()}"></td>
         </tr>
 
         <tr>
-            <td th:text="${cont.getContent()}" colspan="2"></td>
+            <td colspan="2" style="text-align:center">
+                <th:block th:if="${cont.getImage_url() != null}">
+                    <img th:src="${cont.getImage_url()}"
+                         style="max-width:700px; display:block; margin:0 auto 10px;">
+                </th:block>
+                <div th:text="${cont.getContent()}"
+                     style="text-align:left;" ></div>
+            </td>
         </tr>
 
+
         <tr>
-            <td><button th:text="'개추 : '+${cont.getBoard_like()}"></button></td>
-            <td><button th:text="'비추 : '+${cont.getBoard_unlike()}"></button></td>
+            <td><button id="LikeBTN" th:text="'개추 : '+${cont.getBoard_like()}"></button></td>
+            <td><button id="UnlikeBTN" th:text="'비추 : '+${cont.getBoard_unlike()}"></button></td>
         </tr>
     </table>
     <button onclick="history.back()">뒤로가기</button>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/cont.js}"></script>
 </body>
 </html>

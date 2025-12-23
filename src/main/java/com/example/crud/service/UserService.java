@@ -64,6 +64,7 @@ public class UserService {
             userDTO.setId(dto.getId());
             userDTO.setPassword(dto.getPassword());
             userDTO.setKakao_id(dto.getKakaoId());
+
             return userDTO;
         }
 
