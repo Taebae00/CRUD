@@ -34,6 +34,10 @@ public class BoardService {
             dto.setBoard_unlike(list.get(i).getBoardUnlike());
             dto.setHit(list.get(i).getHit());
 
+            if(list.get(i).getImageUrl() != null){
+                dto.setImage_url(list.get(i).getImageUrl());
+            }
+
             boardList.add(dto);
         }
 
@@ -53,6 +57,10 @@ public class BoardService {
         dto.setBoard_unlike(cont.getBoardUnlike());
         dto.setHit(cont.getHit());
 
+        if(cont.getImageUrl() != null){
+            dto.setImage_url(cont.getImageUrl());
+        }
+
         return dto;
     }
 
@@ -60,4 +68,17 @@ public class BoardService {
         boardRepo.hitUp(no);
     }
 
+    public void write(String title, String cont, String writer, String image_url){
+
+        BoardEntity dto = new BoardEntity();
+        dto.setTitle(title);
+        dto.setContent(cont);
+        dto.setWriter(writer);
+
+        if(image_url != null){
+            dto.setImageUrl(image_url);
+        }
+
+        boardRepo.save(dto);
+    }
 }

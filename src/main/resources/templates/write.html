@@ -12,28 +12,47 @@
 
     <br>
 
-    <table id="table" width="750" border="1" cellspacing="0" style="text-align: center">
-        <tr>
-            <td>제목</td>
-        </tr>
+    <form action="/writeOk" method="post" enctype="multipart/form-data" onsubmit="return checkWrite()">
 
-        <tr>
-            <td><textarea></textarea></td>
-        </tr>
+        <input type="hidden" name="writer" th:value="${session.user.getName()}">
+        <table id="table" width="750" border="1" cellspacing="0" style="text-align: center">
+            <tr>
+                <td>제목</td>
+            </tr>
 
-        <tr>
-            <td>작성자</td>
-        </tr>
-        <tr>
-            <td><input th:value="${session.user.getName()}" disabled></td>
-        </tr>
-    </table>
-    <br>
+            <tr>
+                <td><input name="title"></td>
+            </tr>
 
-    <button id="writeBTN">글쓰기</button>
+            <tr>
+                <td>글 내용</td>
+            </tr>
+            <tr>
+                <td><textarea name="cont" style="width: 500px; height: 500px;"></textarea></td>
+            </tr>
+
+            <tr>
+                <td>이미지 업로드</td>
+            </tr>
+
+            <tr>
+                <td><input type="file" name="image" accept="image/*"></td>
+            </tr>
+
+            <tr>
+                <td>작성자</td>
+            </tr>
+            <tr>
+                <td><input th:value="${session.user.getName()}" disabled></td>
+            </tr>
+        </table>
+        <br>
+
+        <button id="submitBTN">글쓰기</button>
+    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script th:src="@{/js/board.js}"></script>
+<script th:src="@{/js/write.js}"></script>
 </body>
 </html>

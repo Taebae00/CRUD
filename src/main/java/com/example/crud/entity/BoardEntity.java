@@ -30,4 +30,7 @@ public class BoardEntity {
 
     @Column(name = "hit")
     private int hit;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 }
