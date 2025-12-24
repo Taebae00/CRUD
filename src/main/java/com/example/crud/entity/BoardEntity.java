@@ -3,6 +3,9 @@ package com.example.crud.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Data
 @Table(name = "board")
@@ -33,4 +36,7 @@ public class BoardEntity {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(name = "board_date")
+    private String boardDate;
 }

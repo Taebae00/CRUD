@@ -2,6 +2,8 @@ package com.example.crud.model;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class BoardDTO {
 
@@ -13,4 +15,5 @@ public class BoardDTO {
     private int board_like;
     private int board_unlike;
     private int hit;
+    private String board_date;
 }

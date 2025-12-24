@@ -5,6 +5,8 @@ import com.example.crud.model.BoardDTO;
 import com.example.crud.repository.BoardRepo;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +35,7 @@ public class BoardService {
             dto.setBoard_like(list.get(i).getBoardLike());
             dto.setBoard_unlike(list.get(i).getBoardUnlike());
             dto.setHit(list.get(i).getHit());
+            dto.setBoard_date(list.get(i).getBoardDate());
 
             if(list.get(i).getImageUrl() != null){
                 dto.setImage_url(list.get(i).getImageUrl());
@@ -56,6 +59,7 @@ public class BoardService {
         dto.setBoard_like(cont.getBoardLike());
         dto.setBoard_unlike(cont.getBoardUnlike());
         dto.setHit(cont.getHit());
+        dto.setBoard_date(cont.getBoardDate());
 
         if(cont.getImageUrl() != null){
             dto.setImage_url(cont.getImageUrl());
@@ -70,10 +74,15 @@ public class BoardService {
 
     public void write(String title, String cont, String writer, String image_url){
 
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String time = now.format(formatter);
+
         BoardEntity dto = new BoardEntity();
         dto.setTitle(title);
         dto.setContent(cont);
         dto.setWriter(writer);
+        dto.setBoardDate(time);
 
         if(image_url != null){
             dto.setImageUrl(image_url);

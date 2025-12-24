@@ -1,9 +1,6 @@
 package com.example.crud.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -12,6 +9,10 @@ import lombok.Data;
 public class CommentEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_no")
+    private int commentNo;
+
     @Column(name = "board_no")
     private int boardNo;
 
@@ -20,4 +21,7 @@ public class CommentEntity {
 
     @Column(name = "content")
     private String content;
+
+    @Column(name = "comment_date")
+    private String commentDate;
 }
