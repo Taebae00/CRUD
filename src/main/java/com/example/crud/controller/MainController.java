@@ -1,12 +1,10 @@
 package com.example.crud.controller;
 
 import com.example.crud.config.S3Config;
+import com.example.crud.model.CommentDTO;
 import com.example.crud.model.UserDTO;
-import com.example.crud.service.BoardLikeService;
-import com.example.crud.service.BoardService;
+import com.example.crud.service.*;
 import com.example.crud.model.BoardDTO;
-import com.example.crud.service.S3Service;
-import com.example.crud.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -29,12 +27,14 @@ public class MainController {
     private final UserService userService;
     private final S3Service s3Service;
     private final BoardLikeService boardLikeService;
+    private final CommentService commentService;
 
-    public MainController(BoardService boardService, UserService userService, UserService userService1, S3Config s3Config, S3Service s3Service, BoardLikeService boardLikeService) {
+    public MainController(BoardService boardService, UserService userService, UserService userService1, S3Config s3Config, S3Service s3Service, BoardLikeService boardLikeService, CommentService commentService) {
         this.boardService = boardService;
         this.userService = userService1;
         this.s3Service = s3Service;
         this.boardLikeService = boardLikeService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/")
@@ -174,5 +174,21 @@ public class MainController {
     public BoardDTO UnlikeUp(String user, int board_no){
 
         return boardLikeService.UnlikeUp(user,board_no);
+    }
+
+    @PostMapping("/get_comments")
+    @ResponseBody
+    public List<CommentDTO> getComments(int board_no){
+
+        return commentService.getComments(board_no);
+    }
+
+    @PostMapping("/write_comment")
+    @ResponseBody
+    public List<CommentDTO> writeComment(String cont, String writer, int board_no){
+
+        commentService.writeComment(cont,writer,board_no);
+
+        return commentService.getComments(board_no);
     }
 }

@@ -17,6 +17,7 @@ window.addEventListener("pageshow",function (){
                 tbl += "<td>"+data[i].hit+"</td>";
                 tbl += "<td>"+data[i].board_like+"</td>";
                 tbl += "<td>"+data[i].board_unlike+"</td>";
+                tbl += "<td>"+data[i].board_date.substring(0,10)+"</td>";
                 tbl += "</tr>"
 
                 $("#tableBody").append(tbl);

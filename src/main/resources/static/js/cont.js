@@ -3,7 +3,7 @@ $("#LikeBTN").on("click", function () {
     const user = $("#sessionUser").val();
     const board_no = $("#board_no").val();
 
-    if(user === ""){
+    if(!user){
         alert("로그인을 한 유저만 개추가 가능합니다.");
         return false
     }
@@ -47,7 +47,7 @@ $("#UnlikeBTN").on("click", function () {
     const board_no = $("#board_no").val();
 
 
-    if(user === ""){
+    if(!user){
         alert("로그인을 한 유저만 비추가 가능합니다.");
         return false
     }

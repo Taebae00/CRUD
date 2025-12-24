@@ -10,16 +10,17 @@
 
     <div th:if="${session.user != null}">
         <input type="hidden" th:value="${session.user.getId()}" id="sessionUser">
-        <input type="hidden" th:value="${cont.getBoard_no()}" id="board_no">
-        <input type="hidden" th:value="${cont.getBoard_like()}" id="board_like">
-        <input type="hidden" th:value="${cont.getBoard_unlike()}" id="board_unlike">
     </div>
+    <input type="hidden" th:value="${cont.getBoard_no()}" id="board_no">
+    <input type="hidden" th:value="${cont.getBoard_like()}" id="board_like">
+    <input type="hidden" th:value="${cont.getBoard_unlike()}" id="board_unlike">
 
     <h2>싱글벙글 백엔드 갤러리</h2>
 
     <table width="750" cellspacing="0" border="1">
         <tr>
-            <td th:text="'글제목 : '+${cont.getTitle()}" colspan="2"></td>
+            <td th:text="'글 제목 : '+${cont.getTitle()}"></td>
+            <td th:text="'작성일자 : '+${cont.getBoard_date().substring(0,19)}"></td>
         </tr>
 
         <tr>
@@ -44,10 +45,26 @@
             <td><button id="UnlikeBTN" th:text="'비추 : '+${cont.getBoard_unlike()}"></button></td>
         </tr>
     </table>
+    <br>
+
+    <div id="comment-area">
+        <th:block th:if="${session.user == null}">
+            <textarea placeholder="로그인 한 유저만 댓글 작성이 가능합니다." disabled style="width: 700px; resize: none"></textarea>
+            <button onsubmit="writeComment()" disabled>등록</button>
+        </th:block>
+
+        <th:block th:if="${session.user != null}">
+        <textarea placeholder="댓글을 작성해주세요" id="comment_cont" style="width: 700px; resize: none"></textarea>
+        <button id="comment_write_BTN">등록</button>
+        </th:block>
+
+        <div id="comment-list"></div>
+    </div>
     <button onclick="history.back()">뒤로가기</button>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/cont.js}"></script>
+<script th:src="@{/js/comment.js}"></script>
 </body>
 </html>
